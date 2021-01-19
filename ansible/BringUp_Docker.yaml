@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  vars:
+  container_image: hellostaragile 
+  container_name: hellostaragile8888
+  become: true
+  tasks:
+  - name: Pull Docker image
+    docker_image:
+     name: "{{ container_image }}"
+     source: pull
+  - name: Create container
+    docker_container:
+     name: "{{ container_name }}"
+     image: "{{ container_image }}"
+     published_ports: 8888:8080
+     state: started
+
